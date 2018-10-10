@@ -13,6 +13,23 @@ class PokemonForm extends React.Component {
     }
   }
 
+  handleSubmit = (event) => {
+    event.preventDefault()
+    let newPokemonObject = {name:event.target[0].value, stats:[{value:event.target[1].value,name:'hp'}], sprites: {front:event.target[2].value, back:event.target[3].value}}
+
+    fetch('http://localhost:3000/pokemon', {
+      method:'POST',
+      headers: {
+        'Content-Type': "application/json"
+      },
+      body: JSON.stringify(newPokemonObject)
+    })
+    .then(resp => resp.json())
+    .then(response => {
+      {this.props.addNewPokemon(newPokemonObject)}
+    })
+  }
+
   render() {
     return (
       <div>
