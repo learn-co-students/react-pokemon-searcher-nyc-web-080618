@@ -1,9 +1,9 @@
 import React from 'react'
-import { Form } from 'semantic-ui-react'
+import {Form} from 'semantic-ui-react'
 
 class PokemonForm extends React.Component {
-  constructor() {
-    super()
+  constructor(props) {
+    super(props)
 
     this.state = {
       name: '',
@@ -13,21 +13,24 @@ class PokemonForm extends React.Component {
     }
   }
 
+  handleSubmit = event => {
+    event.preventDefault()
+    this.props.handleNewPokemon(event)
+  }
+
   render() {
-    return (
-      <div>
-        <h3>Add a Pokemon!</h3>
-        <Form onSubmit={this.handleSubmit}>
-          <Form.Group widths="equal">
-            <Form.Input fluid label="Name" placeholder="Name" name="name" />
-            <Form.Input fluid label="hp" placeholder="hp" name="hp" />
-            <Form.Input fluid label="Front Image URL" placeholder="url" name="frontUrl" />
-            <Form.Input fluid label="Back Image URL" placeholder="url" name="backUrl" />
-          </Form.Group>
-          <Form.Button>Submit</Form.Button>
-        </Form>
-      </div>
-    )
+    return (<div>
+      <h3>Add a Pokemon!</h3>
+      <Form onSubmit={this.handleSubmit}>
+        <Form.Group widths="equal">
+          <Form.Input fluid="fluid" label="Name" placeholder="Name" name="name"/>
+          <Form.Input fluid="fluid" label="hp" placeholder="hp" name="hp"/>
+          <Form.Input fluid="fluid" label="Front Image URL" placeholder="url" name="frontUrl"/>
+          <Form.Input fluid="fluid" label="Back Image URL" placeholder="url" name="backUrl"/>
+        </Form.Group>
+        <Form.Button>Submit</Form.Button>
+      </Form>
+    </div>)
   }
 }
 
